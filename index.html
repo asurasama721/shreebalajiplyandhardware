@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shree Balaji Ply And Hardware</title>
+    <link rel="icon" href="./homepage images/logo/salasarbalaji.jpg" type="image/icon type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Overlay for side menu -->
+    <div class="overlay" id="overlay" onclick="closeSideMenu()"></div>
+
+    <!-- Desktop Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo-container">
+                <img src="./homepage images/logo/newLogo.png" style="width: auto;box-shadow: none;" alt="Logo" class="logo-img">
+                <span class="brand-name"></span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active">
+                <span class="material-symbols-outlined">home</span>
+                Home
+            </a>
+            <a href="./product/index.html" class="nav-link">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                Products
+            </a>
+            <a href="./catalogue/index.html" class="nav-link">
+                <span class="material-symbols-outlined">book_2</span>
+                Catalogue
+            </a>
+            <a href="#about" class="nav-link">
+                <span class="material-symbols-outlined">info</span>
+                About Us
+            </a>
+        </div>
+    </nav>
+
+    <!-- Mobile Top Navigation -->
+    <div class="mobile-top-nav">
+        <div class="mobile-nav-content">
+            <div class="mobile-nav-icon" onclick="openSideMenu()">
+                <span class="material-symbols-outlined">menu</span>
+            </div>
+            <div class="mobile-logo-container">
+                <img src="./homepage images/logo/newLogo.png" alt="Logo" class="mobile-logo-img">
+                <!-- <span class="mobile-logo-text">Balaji Plywood</span> -->
+            </div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Side Navigation -->
+    <nav id="nav-bar">
+        <div class="nav-header">
+            <img src="./homepage images/logo/salasarbalaji.jpg" alt="Logo" class="nav-logo">
+            <div class="nav-title">Shree Balaji Ply And Hardware</div>
+        </div>
+        <div class="nav-menu">
+            <a href="#home" class="nav-item active" onclick="closeSideMenu()">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="./products/index.html" class="nav-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Products</span>
+            </a>
+            <a href="./catalogue/index.html" class="nav-item">
+                <i class="fas fa-book"></i>
+                <span>Catalogue</span>
+            </a>
+            <a href="#about" class="nav-item" onclick="closeSideMenu()">
+                <i class="fas fa-info-circle"></i>
+                <span>About Us</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome To Shree Balaji Ply And Hardware</h1>
+            <p class="hero-subtitle">Your trusted partner for quality plywood, hardware, and furniture fittings</p>
+            <div class="hero-buttons">
+                <a href="./product/index.html" class="hero-btn primary">
+                    <span class="material-symbols-outlined">shopping_bag</span>
+                    Browse Products
+                </a>
+                <a href="#contact" class="hero-btn secondary">
+                    <span class="material-symbols-outlined">call</span>
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slider Section -->
+    <section class="slider-section">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="slider-container">
+            <div class="slider-wrapper" id="sliderWrapper">
+                <div class="slide">
+                    <img src="./homepage images/featured products/heatex.jpeg" alt="Heatex">
+                </div>
+                <div class="slide">
+                    <img src="./homepage images/featured products/jivanjorWS.png" alt="Jivangor WS">
+                </div>
+                <div class="slide">
+                    <img src="./homepage images/featured products/jivanjorSP.png" alt="Jivangor SP">
+                </div>
+                <div class="slide">
+                    <img src="./homepage images/featured products/probond1ltr.jpg" alt="ProBond">
+                </div>
+                <div class="slide">
+                    <img src="./homepage images/featured products/masterlok.png" alt="Masterlok">
+                </div>
+                <div class="slide">
+                    <img src="./homepage images/featured products/salasarbalaji.jpg" alt="Salasarbalaji">
+                </div>
+            </div>
+            <button class="slider-nav prev" onclick="changeSlide(-1)">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button class="slider-nav next" onclick="changeSlide(1)">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+            <div class="slider-controls" id="sliderControls"></div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <h2 class="section-title">Popular Products</h2>
+        <div class="products-grid">
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/heatex.jpeg" alt="Heatex" class="product-image">
+                <div class="product-name">Heatex</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/fevicolmarine.webp" alt="Fevicol Marine" class="product-image">
+                <div class="product-name">Fevicol Marine</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/falcofixultramarine.png" alt="Falcofix Ultramarine" class="product-image">
+                <div class="product-name">Falcofix Ultramarine</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/popscrew.jpg" alt="Pop Screw" class="product-image">
+                <div class="product-name">Pop Screw</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/nickelscrew.jpg" alt="Nickel Screw" class="product-image">
+                <div class="product-name">Nickel Screw</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/selfthread.png" alt="Self Drilling Screw" class="product-image">
+                <div class="product-name">Self Drilling Screw</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/probond1ltr.jpg" alt="Fevicol ProBond" class="product-image">
+                <div class="product-name">Fevicol ProBond</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/bergertape.jpg" alt="Masking Tape" class="product-image">
+                <div class="product-name">Masking Tape</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/telescopicchannel.jpg" alt="Telescopic Channel" class="product-image">
+                <div class="product-name">Telescopic Channel</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/autohingfull.jpg" alt="Auto Hinges" class="product-image">
+                <div class="product-name">Auto Hinges</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/sonatahandle.jpg" alt="Sonata handle" class="product-image">
+                <div class="product-name">Sonata handle</div>
+            </div>
+            <div class="product-card" onclick="window.location.href='./product/index.html'">
+                <img src="./homepage images/popular products/ssselfbbutton.jpg" alt="Self Button" class="product-image">
+                <div class="product-name">Self Button</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>About Us</h2>
+                <p>Discover a world of possibilities with our high-quality plywood products. From construction to
+                    crafting, we've got the perfect plywood for your project.</p>
+                <p>With years of experience in the industry, we pride ourselves on providing exceptional quality
+                    products and outstanding customer service. Your satisfaction is our priority.</p>
+                <p>We offer a comprehensive range of plywood, hardware, and building materials to meet all your
+                    construction and renovation needs.</p>
+            </div>
+            <div>
+                <img src="./homepage images/logo/newLogoStick.png" alt="About Us" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h4>Find Us</h4>
+                <p>Mann Road, Phase-1, Pandav Nagar, Hinjewadi, Pune, Maharashtra-411057</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h4>Call Us</h4>
+                <p>9890147531</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h4>Email Us</h4>
+                <p>misu.vaishnav@gmail.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Shree Balaji Ply And Hardware</h3>
+                <p>Discover a world of possibilities with our high-quality plywood products. From construction to
+                    crafting, we've got the perfect plywood for your project. Your satisfaction is our priority.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="./product/index.html">Products</a></li>
+                    <li><a
+                            href="./catalogue/index.html">Catalogue</a>
+                    </li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Plywood Supply</a></li>
+                    <li><a href="#">Hardware Solutions</a></li>
+                    <li><a href="#">Custom Orders</a></li>
+                    <li><a href="#">Expert Consultation</a></li>
+                    <li><a href="#">Delivery Services</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2024 Shree Balaji Ply And Hardware. All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

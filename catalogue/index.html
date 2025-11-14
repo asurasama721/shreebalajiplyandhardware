@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laminate Catalogues - Balaji Plywood</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --primary-light: #3b82f6;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --dark: #1e293b;
+      --medium: #475569;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --border: #e2e8f0;
+      --card-bg: #ffffff;
+      --background: #f1f5f9;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      background-image: url("frontpage/bg8.jpg");
+      background-size:contain;
+      background-attachment: fixed;
+      background-repeat: repeat;
+      color: var(--dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(216, 216, 216, 0.555);
+      /* backdrop-filter: blur(6px); */
+      color: var(--dark);
+      display: grid;
+      grid-template-columns: 48px 1fr 48px 48px;
+      align-items: center;
+      padding: 12px 24px;
+      z-index: 1000;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-icon {
+      color: var(--dark);
+      text-decoration: none;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: none;
+    }
+
+    .nav-icon:hover {
+      background: var(--light);
+      transform: translateY(-1px);
+      color: var(--primary);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+      /* max-width: 150px; */
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 72px;
+      right: -280px;
+      width: 280px;
+      height: calc(100vh - 72px);
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+      overflow-y: auto;
+      padding: 24px 0;
+      box-shadow: -4px 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar.open {
+      right: 0;
+    }
+
+    .sidebar-header {
+      padding: 0 24px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-title {
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+    }
+
+    .sidebar-category {
+      color: rgba(255, 255, 255, 0.8);
+      padding: 14px 24px;
+      cursor: pointer;
+      transition: var(--transition);
+      border-left: 3px solid transparent;
+      font-weight: 500;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-category:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .sidebar-category.active {
+      background: linear-gradient(90deg, rgba(37, 99, 235, 0.2) 0%, transparent 100%);
+      border-left-color: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+
+    .sidebar-category::before {
+      content: '📁';
+      font-size: 18px;
+    }
+
+    /* Overlay for sidebar */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 72px);
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      backdrop-filter: blur(4px);
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-top: 72px;
+      padding: 40px 24px;
+      min-height: calc(100vh - 72px);
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-subtitle {
+      font-size: 18px;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Category Section */
+    .category-section {
+      margin-bottom: 80px;
+    }
+
+    .category-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      background: rgba(75, 75, 75, 0.137);
+      text-shadow: 1px 1px black;
+      
+      padding: 16px 24px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 40px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      /* border-left: 5px solid var(--primary); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .category-title::before {
+      content: '📚';
+      font-size: 32px;
+    }
+
+    /* Catalogue Grid */
+    .category-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 60px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .book-items {
+      position: relative;
+      transition: var(--transition);
+      padding: 20px;
+    }
+
+    .book-items.category-highlight .book-cover {
+      box-shadow: 
+        0 0 0 4px var(--accent),
+        10px 40px 60px -10px rgba(0, 0, 0, 0.4);
+      transform: translateY(-8px);
+    }
+
+    .main-book-wrap {
+      position: relative;
+      perspective: 2000px;
+    }
+
+    .book-cover {
+      position: relative;
+      cursor: pointer;
+      transition: var(--transition);
+      transform-style: preserve-3d;
+      transform: rotateY(-15deg) translateX(-10px);
+    }
+
+    .book-cover:hover {
+      transform: rotateY(0deg) translateX(0);
+    }
+
+    .book-cover .book-inside {
+      position: absolute;
+      width: 90%;
+      height: 96%;
+      top: 2%;
+      left: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px 8px 8px 4px;
+      background: linear-gradient(90deg, #f0f0f0 0%, white 10%);
+      box-shadow:
+        10px 40px 40px -10px rgba(0, 0, 0, 0.3),
+        inset -2px 0 0 #ddd,
+        inset -3px 0 0 #f5f5f5,
+        inset -4px 0 0 white,
+        inset -5px 0 0 #f5f5f5,
+        inset -6px 0 0 white,
+        inset -7px 0 0 #f5f5f5,
+        inset -8px 0 0 white;
+    }
+
+    .book-image {
+      position: relative;
+      border-radius: 4px 8px 8px 4px;
+      box-shadow:
+        6px 6px 18px -2px rgba(0, 0, 0, 0.2),
+        24px 28px 40px -6px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      background: white;
+    }
+
+    .book-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px 8px 8px 4px;
+      transition: var(--transition);
+    }
+
+    .book-cover:hover .book-image img {
+      transform: scale(1.02);
+    }
+
+    .effect {
+      position: absolute;
+      width: 20px;
+      height: 100%;
+      margin-left: 16px;
+      top: 0;
+      left: 0;
+      border-left: 2px solid rgba(0, 0, 0, 0.1);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+      transition: var(--transition);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .book-cover:hover .effect {
+      margin-left: 14px;
+    }
+
+    .light {
+      width: 90%;
+      height: 100%;
+      position: absolute;
+      border-radius: 4px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 100%);
+      top: 0;
+      right: 0;
+      opacity: 0.5;
+      transition: var(--transition);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .book-cover:hover .light {
+      opacity: 0.8;
+    }
+
+    .catalogue-badge {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      z-index: 10;
+      letter-spacing: 0.5px;
+    }
+
+    /* Scrollbar Styling */
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 10px 16px;
+        grid-template-columns: 40px 1fr 40px 40px;
+        gap: 12px;
+      }
+
+      .nav-icon {
+        font-size: 24px;
+        padding: 6px;
+      }
+
+      .logo-img {
+        height: 35px;
+      }
+
+      .main-content {
+        padding: 24px 16px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+
+      .page-subtitle {
+        font-size: 16px;
+      }
+
+      .category-title {
+        font-size: 22px;
+        padding: 14px 20px;
+      }
+
+      .category-items {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 50px 30px;
+        padding: 15px;
+      }
+
+      .sidebar {
+        width: 250px;
+        right: -250px;
+      }
+
+      .category-section {
+        margin-bottom: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top-nav {
+        padding: 8px 12px;
+        grid-template-columns: 36px 1fr 36px 36px;
+      }
+
+      .page-title {
+        font-size: 24px;
+      }
+
+      .page-subtitle {
+        font-size: 14px;
+      }
+
+      .category-title {
+        font-size: 20px;
+        padding: 12px 16px;
+      }
+
+      .category-title::before {
+        font-size: 24px;
+      }
+
+      .category-items {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 10px;
+      }
+
+      .sidebar {
+        width: 220px;
+        right: -220px;
+      }
+
+      .sidebar-category {
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray);
+    }
+
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Fade In Animation */
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Overlay for sidebar -->
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <!-- Top Navigation -->
+  <div class="top-nav">
+    <a href="../index.html" class="nav-icon" title="Go to Home">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </a>
+    <div class="logo-container">
+      <img src="../homepage images/logo/newLogoStick.png" alt="Balaji Logo" class="logo-img" onerror="this.style.display='none'">
+    </div>
+    <a href="tel:+919890147531" class="nav-icon" title="Call Us">
+      <span class="material-symbols-outlined">call</span>
+    </a>
+    <button class="nav-icon" id="sidebarToggle" title="Categories">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Categories</div>
+      <div class="sidebar-subtitle">Filter by laminate type</div>
+    </div>
+    <!-- Categories will be dynamically added here -->
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="page-header fade-in">
+      <h1 class="page-title">Laminate Catalogues</h1>
+      <p class="page-subtitle">Browse our extensive collection of premium laminates</p>
+    </div>
+
+    <div id="catalogContainer">
+      <div class="loading">Loading catalogues...</div>
+    </div>
+  </div>
+  <script src="catalogueData.js"></script>
+
+  <script>
+    
+
+    // Category order
+    const categoryOrder = ["0.92mm Laminate", "1mm Laminate", "Fabric Laminate", "Acrylic Laminate", "Louvers"];
+
+    let currentlyHighlightedCategory = null;
+
+    // Display catalogues
+    function displayCatalog() {
+      const catalogContainer = document.getElementById("catalogContainer");
+      const sidebar = document.getElementById("sidebar");
+
+      catalogContainer.innerHTML = '';
+
+      // Group catalogues by category
+      const cataloguesByCategory = catalogData.reduce((acc, item) => {
+        if (!acc[item.category]) {
+          acc[item.category] = [];
+        }
+        acc[item.category].push(item);
+        return acc;
+      }, {});
+
+      // Add categories to sidebar
+      categoryOrder.forEach((category) => {
+        if (cataloguesByCategory[category]) {
+          const categoryDiv = document.createElement('div');
+          categoryDiv.className = 'sidebar-category';
+          categoryDiv.setAttribute('data-category', category.replace(/\s+/g, '-'));
+          categoryDiv.textContent = category;
+          sidebar.appendChild(categoryDiv);
+        }
+      });
+
+      // Display catalogues by category
+      categoryOrder.forEach((category) => {
+        if (cataloguesByCategory[category]) {
+          const section = document.createElement('div');
+          section.className = 'category-section fade-in';
+          section.innerHTML = `
+            <h2 class="category-title" id="${category.replace(/\s+/g, '-')}-title">${category}</h2>
+            <div class="category-items" id="${category.replace(/\s+/g, '-')}-items"></div>
+          `;
+          catalogContainer.appendChild(section);
+
+          const itemsContainer = document.getElementById(`${category.replace(/\s+/g, '-')}-items`);
+          
+          cataloguesByCategory[category].forEach((item, index) => {
+            const bookItem = document.createElement('div');
+            bookItem.className = 'book-items';
+            bookItem.setAttribute('data-category', category.replace(/\s+/g, '-'));
+            bookItem.innerHTML = `
+              <a href="${item.link}" target="_blank" style="text-decoration: none;">
+                <div class="main-book-wrap">
+                  <div class="book-cover">
+                    <div class="book-inside"></div>
+                    <div class="book-image">
+                      <img src="${item.imageSrc}" alt="${item.altText}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM2Yzc1N2QiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5DYXRhbG9ndWU8L3RleHQ+PC9zdmc+'">
+                      <div class="effect"></div>
+                      <div class="light"></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            `;
+            itemsContainer.appendChild(bookItem);
+          });
+        }
+      });
+    }
+
+    // Sidebar toggle
+    document.getElementById('sidebarToggle').addEventListener('click', function() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('show');
+    });
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+
+    // Category filtering
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('sidebar-category')) {
+        const category = e.target.getAttribute('data-category');
+
+        // Toggle highlight if clicking same category
+        if (currentlyHighlightedCategory === category) {
+          document.querySelectorAll('.sidebar-category').forEach(el => el.classList.remove('active'));
+          document.querySelectorAll('.book-items').forEach(el => el.classList.remove('category-highlight'));
+          currentlyHighlightedCategory = null;
+          return;
+        }
+
+        // Remove active from all categories
+        document.querySelectorAll('.sidebar-category').forEach(el => el.classList.remove('active'));
+        
+        // Add active to clicked category
+        e.target.classList.add('active');
+
+        // Remove highlight from all items
+        document.querySelectorAll('.book-items').forEach(el => el.classList.remove('category-highlight'));
+
+        // Highlight items in selected category
+        document.querySelectorAll(`.book-items[data-category="${category}"]`).forEach(item => {
+          item.classList.add('category-highlight');
+        });
+
+        currentlyHighlightedCategory = category;
+
+        // Scroll to category
+        const title = document.getElementById(`${category}-title`);
+        if (title) {
+          title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Close sidebar on mobile
+        if (window.innerWidth <= 768) {
+          closeSidebar();
+        }
+      }
+    });
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', function(e) {
+      const sidebar = document.getElementById('sidebar');
+      const sidebarToggle = document.getElementById('sidebarToggle');
+
+      if (sidebar.classList.contains('open') && 
+          !sidebar.contains(e.target) && 
+          e.target !== sidebarToggle && 
+          !sidebarToggle.contains(e.target) &&
+          !e.target.classList.contains('overlay')) {
+        closeSidebar();
+      }
+    });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', displayCatalog);
+  </script>
+</body>
+</html>
