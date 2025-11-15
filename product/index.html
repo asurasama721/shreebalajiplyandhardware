@@ -1128,7 +1128,7 @@
 
             .product-image {
                 /* height: 120px; */
-                padding: 10px;
+                padding: 0px;
                 margin-bottom: 12px;
             }
 
@@ -1883,7 +1883,7 @@
                 border: 1px solid #000;
             }
         }
-        @media (max-width: 600px) { .notification { display: none !important; } }
+        /* @media (max-width: 600px) { .notification { display: none !important; } } */
     </style>
 </head>
 
@@ -3971,7 +3971,7 @@
         function showNotification(message, type = 'info', duration = 4000) {
 
             if (window.innerWidth <= 480) return; // Add this line
-            
+
             const notification = document.getElementById('notification');
             const messageEl = notification.querySelector('.notification-message');
             const iconEl = notification.querySelector('.notification-icon');

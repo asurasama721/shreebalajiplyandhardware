@@ -2217,6 +2217,7 @@
                             </div>
 
                             <!-- Configuration Panels -->
+                            <!-- Configuration Panels -->
                             <div id="configPanels">
                                 <!-- Text Panel -->
                                 <div id="textPanel" class="config-panel" style="display: none;">
@@ -3691,10 +3692,17 @@
             const productCode = inputElement.value.trim();
             const warningElement = inputElement.nextElementSibling;
 
+            // Check if warning element exists and is the correct type
+            if (!warningElement || !warningElement.classList.contains('duplicate-warning')) {
+                console.warn('Duplicate warning element not found for:', inputElement);
+                return false;
+            }
+
             if (!productCode) {
                 inputElement.style.border = '2px solid var(--border)';
+                inputElement.style.backgroundColor = 'var(--white)';
                 warningElement.style.display = 'none';
-                return;
+                return false;
             }
 
             let isDuplicate = false;
@@ -3702,6 +3710,14 @@
             // Check in main products
             for (let itemName in PRODUCTS) {
                 const product = PRODUCTS[itemName];
+
+                // Skip the current product being edited
+                const editMode = document.getElementById('editMode').value === 'true';
+                const originalItemName = document.getElementById('originalItemName').value;
+
+                if (editMode && itemName === originalItemName) {
+                    continue; // Skip the product being edited
+                }
 
                 // Check main product code
                 if (product.productCode === productCode) {
@@ -3723,34 +3739,22 @@
                 if (isDuplicate) break;
             }
 
-            // Also check current form if we're in edit mode
-            if (!isDuplicate && type === 'product') {
-                const currentProductCode = document.getElementById('productCode').value.trim();
-                const editMode = document.getElementById('editMode').value === 'true';
-                const originalItemName = document.getElementById('originalItemName').value;
-
-                // Skip checking against itself in edit mode
-                if (editMode && productCode === currentProductCode) {
-                    isDuplicate = false;
-                } else if (productCode === currentProductCode) {
-                    isDuplicate = true;
-                }
-            }
-
-            // Also check other variants in the same form
+            // Check other variants in the same form (excluding current variant)
             if (!isDuplicate && type === 'variant') {
                 const variantItems = document.querySelectorAll('.variant-item');
+                const currentVariantItem = inputElement.closest('.variant-item');
+
                 variantItems.forEach(item => {
-                    if (item !== inputElement.closest('.variant-item')) {
-                        const otherCode = item.querySelector('.variant-code-input').value.trim();
-                        if (otherCode === productCode) {
+                    if (item !== currentVariantItem) {
+                        const otherCodeInput = item.querySelector('.variant-code-input');
+                        if (otherCodeInput && otherCodeInput.value.trim() === productCode) {
                             isDuplicate = true;
                         }
                     }
                 });
             }
 
-            // Apply styling
+            // Apply styling only if elements exist
             if (isDuplicate) {
                 inputElement.style.border = '2px solid #ff4444';
                 inputElement.style.backgroundColor = '#fff5f5';
@@ -4900,45 +4904,45 @@
         }
 
         function filterProducts() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const selectedCategory = document.getElementById('categoryFilter').value.toLowerCase();
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategory = document.getElementById('categoryFilter').value.toLowerCase();
 
-    if (currentSortField === 'none') {
-        let filteredProducts = {};
+            if (currentSortField === 'none') {
+                let filteredProducts = {};
 
-        Object.keys(PRODUCTS).forEach(itemName => {
-            const product = PRODUCTS[itemName];
-            if (!product) return; // Skip if product is undefined
+                Object.keys(PRODUCTS).forEach(itemName => {
+                    const product = PRODUCTS[itemName];
+                    if (!product) return; // Skip if product is undefined
 
-            // Safe property access with fallbacks
-            const productCode = product.productCode || '';
-            const brandName = product.brandName || '';
-            const description = product.description || '';
-            const otherNames = product.otherName || [];
-            const category = product.category || '';
+                    // Safe property access with fallbacks
+                    const productCode = product.productCode || '';
+                    const brandName = product.brandName || '';
+                    const description = product.description || '';
+                    const otherNames = product.otherName || [];
+                    const category = product.category || '';
 
-            const matchesSearch = searchTerm === '' ||
-                itemName.toLowerCase().includes(searchTerm) ||
-                productCode.toLowerCase().includes(searchTerm) ||
-                brandName.toLowerCase().includes(searchTerm) ||
-                (otherNames.some(name => name && name.toLowerCase().includes(searchTerm))) ||
-                description.toLowerCase().includes(searchTerm);
+                    const matchesSearch = searchTerm === '' ||
+                        itemName.toLowerCase().includes(searchTerm) ||
+                        productCode.toLowerCase().includes(searchTerm) ||
+                        brandName.toLowerCase().includes(searchTerm) ||
+                        (otherNames.some(name => name && name.toLowerCase().includes(searchTerm))) ||
+                        description.toLowerCase().includes(searchTerm);
 
-            // Case-insensitive category matching
-            const productCategory = category.toLowerCase();
-            const matchesCategory = selectedCategory === 'all' || productCategory === selectedCategory;
+                    // Case-insensitive category matching
+                    const productCategory = category.toLowerCase();
+                    const matchesCategory = selectedCategory === 'all' || productCategory === selectedCategory;
 
-            if (matchesSearch && matchesCategory) {
-                filteredProducts[itemName] = product;
+                    if (matchesSearch && matchesCategory) {
+                        filteredProducts[itemName] = product;
+                    }
+                });
+
+                displayProducts(filteredProducts);
+            } else {
+                // If sorting is active, re-apply sorting
+                sortProducts();
             }
-        });
-
-        displayProducts(filteredProducts);
-    } else {
-        // If sorting is active, re-apply sorting
-        sortProducts();
-    }
-}
+        }
 
         function updateCategoryFilter() {
             const categoryFilter = document.getElementById('categoryFilter');
@@ -5264,7 +5268,6 @@
             });
         }
 
-        // Edit functionality
         function editProduct(itemName) {
             const product = PRODUCTS[itemName];
             if (!product) return;
@@ -5300,61 +5303,72 @@
                     variantIndex++;
 
                     const variantHTML = `
-                <div class="variant-item" id="${variantId}">
-                    <div class="variant-header">
-                        <div class="variant-name">Variant ${variantIndex}</div>
-                        <button type="button" class="remove-variant-btn" onclick="removeVariant('${variantId}')">Remove</button>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Variant Name</label>
-                            <input type="text" class="variant-name-input" value="${variantName}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Product Code</label>
-                            <input type="text" class="variant-code-input" value="${variant.productCode}" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Sell Price</label>
-                            <input type="number" class="variant-sellprice-input" value="${variant.sellPrice}" step="0.01" required>
-                        </div>
-                        <div class="form-group">
-                            <label>MRP</label>
-                            <input type="number" class="variant-mrp-input" value="${variant.mrp}" step="0.01">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Unit</label>
-                            <input type="text" class="variant-unit-input" value="${variant.unit}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Packing</label>
-                            <input type="text" class="variant-packing-input" value="${variant.packing}" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>In Stock</label>
-                            <input type="number" class="variant-stock-input" value="${variant.inStock}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Image URLs (comma separated)</label>
-                            <input type="text" class="variant-image-input" value="${Array.isArray(variant.image) ? variant.image.join(', ') : variant.image}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Other Names (comma separated)</label>
-                        <input type="text" class="variant-othernames-input" value="${variant.otherName ? variant.otherName.join(', ') : ''}">
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="variant-description-input" rows="2" required>${variant.description}</textarea>
-                    </div>
-                </div>
-            `;
+    <div class="variant-item" id="${variantId}">
+        <div class="variant-header">
+            <div class="variant-name">Variant ${variantIndex}</div>
+            <button type="button" class="remove-variant-btn" onclick="removeVariant('${variantId}')">Remove</button>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Variant Name</label>
+                <input type="text" class="variant-name-input" value="${variantName}" required>
+            </div>
+            <div class="form-group">
+                <label>Product Code</label>
+                <input type="text" class="variant-code-input" value="${variant.productCode}" required oninput="checkProductCodeDuplicate(this, 'variant')">
+                <div class="duplicate-warning" style="display: none; color: red; font-size: 12px; margin-top: 4px;">Product code already exists</div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Brand Name</label>
+                <input type="text" class="variant-brand-input" value="${variant.brandName || ''}" required>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <input type="text" class="variant-category-input" value="${variant.category || ''}" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Sell Price</label>
+                <input type="number" class="variant-sellprice-input" value="${variant.sellPrice}" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>MRP</label>
+                <input type="number" class="variant-mrp-input" value="${variant.mrp}" step="0.01">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Unit</label>
+                <input type="text" class="variant-unit-input" value="${variant.unit}" required>
+            </div>
+            <div class="form-group">
+                <label>Packing</label>
+                <input type="text" class="variant-packing-input" value="${variant.packing}" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>In Stock</label>
+                <input type="number" class="variant-stock-input" value="${variant.inStock}" required>
+            </div>
+            <div class="form-group">
+                <label>Image URLs (comma separated)</label>
+                <input type="text" class="variant-image-input" value="${Array.isArray(variant.image) ? variant.image.join(', ') : variant.image}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Other Names (comma separated)</label>
+            <input type="text" class="variant-othernames-input" value="${variant.otherName ? variant.otherName.join(', ') : ''}">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea class="variant-description-input" rows="3" required style="width: 100%; padding: 10px; border: 2px solid var(--border); border-radius: var(--radius);">${variant.description}</textarea>
+        </div>
+    </div>
+`;
 
                     variantsList.insertAdjacentHTML('beforeend', variantHTML);
                 }
