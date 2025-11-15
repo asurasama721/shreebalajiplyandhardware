@@ -274,7 +274,6 @@
             object-fit: contain;
             margin-bottom: 16px;
             border-radius: var(--radius);
-            /* background: var(--light); */
             padding: 16px;
             transition: var(--transition);
         }
@@ -570,6 +569,45 @@
             border: 1px solid var(--border);
         }
 
+        /* Cart Modal Fixed Layout */
+        #cartModal .modal-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-height: 85vh;
+            padding: 0;
+        }
+
+        #cartModal .modal-header {
+            flex-shrink: 0;
+            padding: 20px;
+            margin-bottom: 0;
+            border-bottom: 2px solid var(--border);
+            background: white;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        #cartModal #cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px;
+            max-height: calc(100% - 140px);
+        }
+
+        #cartModal .cart-total {
+            flex-shrink: 0;
+            padding: 20px;
+            margin-top: 0;
+            border-top: 2px solid var(--border);
+            background: white;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        }
+
+        #cartModal .submit-btn {
+            /* margin: 0 20px 20px 20px; */
+            flex-shrink: 0;
+        }
+
         @keyframes modalSlideIn {
             from {
                 opacity: 0;
@@ -811,14 +849,15 @@
         }
 
         .submit-btn {
-            width: 100%;
+            width: 90%;
+            margin: 20px auto;
             padding: 16px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
             border-radius: var(--radius);
             font-size: 17px;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             margin-top: 12px;
@@ -839,17 +878,17 @@
         @media (max-width: 768px) {
             .top-nav {
                 grid-template-columns: 28px 1fr auto;
-                padding: 10px 16px;
-                gap: 10px;
+                padding: 8px 12px;
+                gap: 8px;
             }
 
             .nav-icon {
-                font-size: 22px;
+                font-size: 20px;
                 padding: 6px;
             }
 
             .search-bar {
-                padding: 9px 16px 9px 40px;
+                padding: 8px 12px 8px 36px;
                 font-size: 13px;
             }
 
@@ -857,87 +896,121 @@
                 gap: 6px;
             }
 
+            .filter-section {
+                padding: 12px 12px;
+                gap: 8px;
+                margin-top: 60px;
+            }
+
+            .category-filter {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .action-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+                gap: 6px;
+            }
+
             .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 20px;
-                padding: 20px;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 16px;
+                padding: 16px;
+                margin-bottom: 70px;
             }
 
             .product-card {
-                padding: 18px;
-                min-height: 380px;
+                padding: 14px;
+                min-height: 320px;
             }
 
             .product-image {
-                height: 180px;
+                height: 150px;
+                padding: 12px;
             }
 
-            .filter-section {
-                padding: 14px 16px;
-                gap: 10px;
-                margin-top: 68px;
+            .product-name {
+                font-size: 15px;
+                min-height: 44px;
+                margin-bottom: 8px;
             }
 
-            .modal-content {
-                width: 95%;
-                margin: 16px;
-                padding: 24px;
+            .product-price {
+                font-size: 16px;
+                margin-bottom: 10px;
             }
 
-            .product-detail {
-                width: 100%;
-                padding: 24px 16px;
-                margin: 0;
+            .add-to-cart-btn {
+                padding: 10px;
+                font-size: 13px;
             }
 
-            .back-btn {
-                margin: 64px 0 16px 0 !important;
+            .quantity-selector {
+                padding: 6px;
+            }
+
+            .qty-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 18px;
+            }
+
+            .qty-input {
+                width: 60px;
+                height: 36px;
+                font-size: 15px;
             }
 
             .variant-buttons {
                 grid-template-columns: repeat(4, 1fr);
                 gap: 6px;
+                margin-top: 10px;
+                margin-bottom: 12px;
             }
 
             .variant-btn {
                 font-size: 11px;
-                padding: 8px 6px;
-                min-height: 38px;
+                padding: 8px 4px;
+                min-height: 36px;
             }
 
-            .slider-image {
-                height: 350px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .top-nav {
-                grid-template-columns: 24px 1fr auto;
-                padding: 8px 12px;
+            .modal-content {
+                width: 95%;
+                margin: 12px;
+                padding: 20px;
             }
 
-            .search-bar {
-                padding: 8px 14px 8px 38px;
-                font-size: 12px;
-            }
-
-            .nav-icons {
-                gap: 4px;
-            }
-
-            .nav-icon {
+            .modal-title {
                 font-size: 20px;
             }
 
-            .products-grid {
-                grid-template-columns: 1fr;
-                padding: 16px;
-                gap: 16px;
+            .modal-header {
+                margin-bottom: 20px;
+                padding-bottom: 14px;
             }
 
-            .product-card {
-                padding: 16px;
-                min-height: 360px;
+            .form-group input {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+
+            .submit-btn {
+                padding: 14px;
+                font-size: 15px;
+            }
+
+            .cart-item {
+                padding: 14px;
+                gap: 12px;
+            }
+
+            .cart-item-name {
+                font-size: 14px;
+            }
+
+            .cart-item-price {
+                font-size: 13px;
             }
 
             .product-detail {
@@ -945,22 +1018,301 @@
             }
 
             .back-btn {
-                margin: 60px 0 16px 0 !important;
-            }
-
-            .modal-content {
-                padding: 20px;
-            }
-
-            .cart-badge {
-                min-width: 16px;
-                height: 16px;
-                font-size: 10px;
+                margin: 56px 0 16px 0 !important;
             }
 
             .slider-image {
                 height: 300px;
-                padding: 24px;
+                padding: 20px;
+            }
+
+            .slider-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .total-amount {
+                font-size: 24px;
+            }
+
+            .scan-actions-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .notification {
+                top: 80px;
+                right: 12px;
+                left: 12px;
+                max-width: calc(100% - 24px);
+                padding: 14px 16px;
+            }
+
+            .notification-message {
+                font-size: 14px;
+            }
+
+            /* Cart Modal Mobile Fixes */
+            #cartModal .modal-content {
+                height: 100%;
+                max-height: 85vh;
+            }
+
+            #cartModal .modal-header {
+                padding: 16px;
+            }
+
+            #cartModal #cart-items {
+                padding: 0 16px;
+            }
+
+            #cartModal .cart-total {
+                padding: 16px;
+            }
+
+            /* #cartModal .submit-btn {
+                margin: 0 16px 16px 16px;
+            } */
+        }
+
+        @media (max-width: 600px) {
+            .top-nav {
+                grid-template-columns: 24px 1fr auto;
+                padding: 6px 10px;
+                gap: 6px;
+            }
+
+            .nav-icon {
+                font-size: 20px;
+                padding: 5px;
+            }
+
+            .search-bar {
+                padding: 7px 10px 7px 32px;
+                font-size: 12px;
+            }
+
+            .nav-icons {
+                gap: 4px;
+            }
+
+            .filter-section {
+                padding: 10px 10px;
+                gap: 6px;
+                margin-top: 56px;
+            }
+
+            .category-filter {
+                padding: 7px 10px;
+                font-size: 12px;
+            }
+
+            .action-btn {
+                padding: 7px 10px;
+                font-size: 11px;
+                gap: 4px;
+            }
+
+            .products-grid {
+                /* grid-template-columns: repeat(2, 1fr); */
+                gap: 12px;
+                padding: 12px;
+                margin-bottom: 60px;
+            }
+
+            .product-card {
+                padding: 12px;
+                min-height: 280px;
+            }
+
+            .product-image {
+                height: 120px;
+                padding: 10px;
+                margin-bottom: 12px;
+            }
+
+            .product-name {
+                font-size: 16px;
+                text-transform: capitalize;
+                min-height: 40px;
+                margin-bottom: 6px;
+                -webkit-line-clamp: 2;
+            }
+
+            .product-price {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+
+            .add-to-cart-btn {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .quantity-selector {
+                padding: 5px;
+            }
+
+            .qty-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
+            }
+
+            .qty-input {
+                width: 50px;
+                height: 32px;
+                font-size: 14px;
+                margin: 0 8px;
+            }
+
+            .variant-buttons {
+                /* grid-template-columns: repeat(2, 1fr); */
+                gap: 6px;
+                margin-top: 8px;
+                margin-bottom: 10px;
+            }
+
+            .variant-btn {
+                font-size: 12px;
+                padding: 7px 3px;
+                min-height: 32px;
+            }
+
+            .modal-content {
+                padding: 16px;
+                margin: 8px;
+            }
+
+            .modal-title {
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            .modal-header {
+                margin-bottom: 16px;
+                padding-bottom: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 16px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            .form-group input {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .submit-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .cart-item {
+                padding: 12px;
+                gap: 10px;
+                margin-bottom: 8px;
+            }
+
+            .cart-item-name {
+                font-size: 13px;
+            }
+
+            .cart-item-price {
+                font-size: 12px;
+            }
+
+            .remove-btn {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .product-detail {
+                padding: 16px 8px;
+            }
+
+            .back-btn {
+                margin: 52px 0 12px 0 !important;
+            }
+
+            .slider-image {
+                height: 250px;
+                padding: 16px;
+            }
+
+            .slider-nav-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .slider-nav-btn.prev {
+                left: 10px;
+            }
+
+            .slider-nav-btn.next {
+                right: 10px;
+            }
+
+            .total-amount {
+                font-size: 20px;
+            }
+
+            .cart-badge {
+                min-width: 14px;
+                height: 14px;
+                font-size: 9px;
+            }
+
+            .notification {
+                top: 70px;
+                right: 8px;
+                left: 8px;
+                max-width: calc(100% - 16px);
+                padding: 12px 14px;
+            }
+
+            .notification-message {
+                font-size: 13px;
+            }
+
+            .notification-icon {
+                font-size: 18px;
+                width: 24px;
+            }
+
+            .notification-close {
+                width: 28px;
+                height: 28px;
+                font-size: 18px;
+            }
+
+            /* Cart Modal Mobile Fixes */
+            #cartModal .modal-content {
+                height: 100%;
+                max-height: 75vh;
+            }
+
+            #cartModal .modal-header {
+                padding: 10px;
+            }
+
+            #cartModal #cart-items {
+                padding: 0 14px;
+            }
+
+            #cartModal .cart-total {
+                padding: 8px 25px;
+            }
+
+            #cartModal .submit-btn {
+                margin: 5px auto 20px auto;
             }
         }
 
@@ -1629,7 +1981,11 @@
                 <label>Contact Number</label>
                 <input type="tel" id="editCustomerPhone" placeholder="Enter your phone number">
             </div>
-            <button class="submit-btn" onclick="updateProfile()">
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <input type="text" id="editCustomerAddress" placeholder="Enter your delivery address">
+            </div>
+            <button class="submit-btn" onclick="updateProfile()" style="width: 100%;">
                 💾 Update Profile
             </button>
         </div>
@@ -1699,7 +2055,7 @@
             <div class="modal-header">
                 <h3 class="modal-title">🛒 Shopping Cart</h3>
                 <div style="display: flex; gap: 10px; align-items: center;">
-                    <button class="action-btn" onclick="clearCart()" style="background: var(--danger);"
+                    <button class="action-btn" onclick="clearCart()" style="background: var(--danger); display: flex;"
                         id="cartClearBtn">
                         <span class="material-symbols-outlined">delete</span>
                         Clear All
@@ -1707,10 +2063,15 @@
                     <button class="close-btn" onclick="closeCart()">×</button>
                 </div>
             </div>
-            <div id="cart-items"></div>
+
+            <div id="cart-items">
+                <div class="text-center" style="padding: 40px; color: var(--gray);">🛒 Your cart is empty</div>
+            </div>
+
             <div class="cart-total">
                 <h3>Total: ₹<span id="cartTotal">0</span></h3>
             </div>
+
             <button class="submit-btn" onclick="sendOrder()" style="background: #25d366;">
                 📱 Send Order via WhatsApp
             </button>
@@ -1748,6 +2109,10 @@
                 <label>Contact Number</label>
                 <input type="tel" id="customerPhone" placeholder="Enter your phone number" required>
             </div>
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <input type="text" id="customerAddress" placeholder="Enter your delivery address" required>
+            </div>
             <button class="submit-btn" onclick="saveCustomer()">
                 🚀 Start Shopping
             </button>
@@ -1762,7 +2127,7 @@
     <script src="db.js"></script>
 
     <script>
-        
+
 
         // Global Variables
         let cart = {};
@@ -1816,13 +2181,14 @@
         function saveCustomer() {
             const name = document.getElementById('customerName').value;
             const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
 
-            if (!name || !phone) {
+            if (!name || !phone || !address) {
                 showNotification('Please fill all fields', 'error', 3000);
                 return;
             }
 
-            currentCustomer = { name, phone, timestamp: new Date().toISOString() };
+            currentCustomer = { name, phone, address, timestamp: new Date().toISOString() };
 
             openDatabase(function (db) {
                 if (!db) {
@@ -1851,6 +2217,7 @@
 
             document.getElementById('editCustomerName').value = currentCustomer.name;
             document.getElementById('editCustomerPhone').value = currentCustomer.phone;
+            document.getElementById('editCustomerAddress').value = currentCustomer.address || '';
             document.getElementById('profileModal').style.display = 'flex';
         }
 
@@ -1861,13 +2228,14 @@
         function updateProfile() {
             const name = document.getElementById('editCustomerName').value;
             const phone = document.getElementById('editCustomerPhone').value;
+            const address = document.getElementById('editCustomerAddress').value;
 
-            if (!name || !phone) {
+            if (!name || !phone || !address) {
                 showNotification('Please fill all fields', 'error', 3000);
                 return;
             }
 
-            currentCustomer = { name, phone, timestamp: new Date().toISOString() };
+            currentCustomer = { name, phone, address, timestamp: new Date().toISOString() };
 
             openDatabase(function (db) {
                 if (!db) {
@@ -3533,7 +3901,6 @@
             }
 
             const orderArray = Object.keys(cart).map(cartKey => {
-                // Find product code for this cart item
                 let productCode = '';
 
                 Object.keys(PRODUCTS).forEach(productName => {
@@ -3555,7 +3922,8 @@
             });
 
             orderArray.push(currentCustomer.phone);
-            orderArray.push(currentCustomer.name);
+            orderArray.push(`"${currentCustomer.name}"`);
+            orderArray.push(`"${currentCustomer.address}"`);
 
             const orderText = `[${orderArray.join(', ')}]`;
 

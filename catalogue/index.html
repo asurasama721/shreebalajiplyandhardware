@@ -11,7 +11,8 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      /* font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     :root {
@@ -103,10 +104,10 @@
     /* Sidebar */
     .sidebar {
       position: fixed;
-      top: 72px;
+      top: 65px;
       right: -280px;
       width: 280px;
-      height: calc(100vh - 72px);
+      height:100%;
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 999;
@@ -170,13 +171,13 @@
     .overlay {
       display: none;
       position: fixed;
-      top: 72px;
+      top: 65px;
       left: 0;
       width: 100%;
-      height: calc(100vh - 72px);
+      height: 100%;
       background: rgba(0, 0, 0, 0.5);
       z-index: 998;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(2px);
     }
 
     .overlay.show {
@@ -197,16 +198,20 @@
 
     .page-title {
       font-size: 36px;
-      font-weight: 800;
+      font-weight: 650;
       color: var(--dark);
       margin-bottom: 12px;
       letter-spacing: -0.5px;
+      text-shadow: 1px 1px rgba(255, 255, 255, 0.74);
+
     }
 
     .page-subtitle {
       font-size: 18px;
-      color: var(--gray);
+      color: rgb(53, 53, 53);
       font-weight: 500;
+      text-shadow: 1px 1px rgba(255, 255, 255, 0.733);
+
     }
 
     /* Category Section */
@@ -248,113 +253,118 @@
       padding: 20px;
     }
 
-    .book-items {
-      position: relative;
-      transition: var(--transition);
-      padding: 20px;
-    }
+    .book-wrapper {
+        width: 100%;
+        max-width: 900px;
+        position: relative;
+        margin: 0 auto;
+        column-count: 3;
+        column-gap: 12px;
+        padding: 4px;
+      }
+      
+      .book-items {
+        position: relative;
+        cursor: default;
+        padding: 30px;
+        margin: 0;
+        display: grid;
+        break-inside: avoid;
+      }
 
-    .book-items.category-highlight .book-cover {
-      box-shadow: 
-        0 0 0 4px var(--accent),
-        10px 40px 60px -10px rgba(0, 0, 0, 0.4);
-      transform: translateY(-8px);
-    }
+      .main-book-wrap {
+        position: relative;
+      }
 
-    .main-book-wrap {
-      position: relative;
-      perspective: 2000px;
-    }
+      .book-cover {
+        position: relative;
+      }
 
-    .book-cover {
-      position: relative;
-      cursor: pointer;
-      transition: var(--transition);
-      transform-style: preserve-3d;
-      transform: rotateY(-15deg) translateX(-10px);
-    }
+      .book-cover .book-inside {
+        position: absolute;
+        width: 90%;
+        height: 96%;
+        top: 1%;
+        left: 16px;
+        border: 1px solid grey;
+        border-radius: 2px 6px 6px 2px;
+        background: white;
+        box-shadow:
+          10px 40px 40px -10px #00000030,
+          inset -2px 0 0 grey,
+          inset -3px 0 0 #dbdbdb,
+          inset -4px 0 0 white,
+          inset -5px 0 0 #dbdbdb,
+          inset -6px 0 0 white,
+          inset -7px 0 0 #dbdbdb,
+          inset -8px 0 0 white,
+          inset -9px 0 0 #dbdbdb;
+      }
 
-    .book-cover:hover {
-      transform: rotateY(0deg) translateX(0);
-    }
+      .book-cover .book-image {
+        line-height: 0;
+        position: relative;
+        border-radius: 2px 6px 6px 2px;
+        box-shadow:
+          6px 6px 18px -2px rgba(0, 0, 0, 0.2),
+          24px 28px 40px -6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+        transform: perspective(2000px) rotateY(-15deg) translateX(-10px)
+          scaleX(0.94);
+        cursor: pointer;
+      }
 
-    .book-cover .book-inside {
-      position: absolute;
-      width: 90%;
-      height: 96%;
-      top: 2%;
-      left: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px 8px 8px 4px;
-      background: linear-gradient(90deg, #f0f0f0 0%, white 10%);
-      box-shadow:
-        10px 40px 40px -10px rgba(0, 0, 0, 0.3),
-        inset -2px 0 0 #ddd,
-        inset -3px 0 0 #f5f5f5,
-        inset -4px 0 0 white,
-        inset -5px 0 0 #f5f5f5,
-        inset -6px 0 0 white,
-        inset -7px 0 0 #f5f5f5,
-        inset -8px 0 0 white;
-    }
+      .book-image img {
+        grid-row: 1 / -1;
+        grid-column: 1;
+        width: 100%;
+        border-radius: 2px 6px 6px 2px;
+      }
 
-    .book-image {
-      position: relative;
-      border-radius: 4px 8px 8px 4px;
-      box-shadow:
-        6px 6px 18px -2px rgba(0, 0, 0, 0.2),
-        24px 28px 40px -6px rgba(0, 0, 0, 0.15);
-      overflow: hidden;
-      background: white;
-    }
+      .book-image:hover {
+        transform: perspective(2000px) rotateY(0deg) translateX(0px) scaleX(1);
+        transform-style: preserve-3d;
+        box-shadow:
+          6px 6px 12px -1px rgba(0, 0, 0, 0.1),
+          20px 14px 16px -6px rgba(0, 0, 0, 0.1);
+      }
 
-    .book-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 4px 8px 8px 4px;
-      transition: var(--transition);
-    }
+      .effect {
+        position: absolute;
+        width: 20px;
+        height: 100%;
+        margin-left: 16px;
+        top: 0;
+        border-left: 2px solid #00000010;
+        background-image: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.2) 0%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transition: all 0.5s ease;
+        z-index: 5;
+      }
 
-    .book-cover:hover .book-image img {
-      transform: scale(1.02);
-    }
+      .light {
+        width: 90%;
+        height: 100%;
+        position: absolute;
+        border-radius: 3px;
+        background-image: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.2) 100%
+        );
+        top: 0;
+        right: 0;
+        opacity: 0.1;
+        transition: all 0.5s ease;
+        z-index: 4;
+      }
 
-    .effect {
-      position: absolute;
-      width: 20px;
-      height: 100%;
-      margin-left: 16px;
-      top: 0;
-      left: 0;
-      border-left: 2px solid rgba(0, 0, 0, 0.1);
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
-      transition: var(--transition);
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .book-cover:hover .effect {
-      margin-left: 14px;
-    }
-
-    .light {
-      width: 90%;
-      height: 100%;
-      position: absolute;
-      border-radius: 4px;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 100%);
-      top: 0;
-      right: 0;
-      opacity: 0.5;
-      transition: var(--transition);
-      z-index: 4;
-      pointer-events: none;
-    }
-
-    .book-cover:hover .light {
-      opacity: 0.8;
-    }
+      .book-image:hover .effect {
+        margin-left: 14px;
+      }
 
     .catalogue-badge {
       position: absolute;
@@ -406,6 +416,13 @@
         height: 35px;
       }
 
+      .overlay{
+        top: 56px;
+      }
+      .sidebar{
+        top: 56px;
+      }
+
       .main-content {
         padding: 24px 16px;
       }
@@ -446,11 +463,15 @@
       }
 
       .page-title {
-        font-size: 24px;
+        font-size: 26px;
       }
 
       .page-subtitle {
-        font-size: 14px;
+        font-size: 16px;
+      }
+      .overlay {
+        top: 52px;
+        height: 100%;
       }
 
       .category-title {
@@ -471,6 +492,8 @@
       .sidebar {
         width: 220px;
         right: -220px;
+        top: 52px;
+        height: 100%;
       }
 
       .sidebar-category {
@@ -551,8 +574,8 @@
   <!-- Main Content -->
   <div class="main-content">
     <div class="page-header fade-in">
-      <h1 class="page-title">Laminate Catalogues</h1>
-      <p class="page-subtitle">Browse our extensive collection of premium laminates</p>
+      <h1 class="page-title">Catalogue Collection</h1>
+      <p class="page-subtitle">Browse our extensive collection of premium laminates & wall panels</p>
     </div>
 
     <div id="catalogContainer">
