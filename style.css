@@ -752,7 +752,8 @@ body {
     }
 
     .slide img {
-        padding: 24px;
+        max-width: 350px;
+        padding: 20px;
     }
 
     .slider-nav {
@@ -800,6 +801,7 @@ body {
     }
 
     .slide img {
+        width: 300px;
         padding: 20px;
     }
 }
