@@ -1,6 +1,9 @@
 // Catalogue Data
     const catalogData = [
-      { link: "https://drive.google.com/file/d/1zbOdZNqBQWihmnZXl-IHHHp62Vgxm2iU/view?usp=drive_link", imageSrc: "frontpage/dixon.png", altText: "Dixon Catalogue Cover", category: "1mm Laminate" },
+      { link: "https://drive.google.com/file/d/1NSeAS13v6LDNRreqREpopiqTeZSWHJFh/view?usp=drive_link", imageSrc: "frontpage/kridha1mm.png", altText: "kridha 100 Catalogue Cover", category: "1mm Laminate" },
+      { link: "https://drive.google.com/file/d/1nJDHGkuSIjnAf82ZGOfrfzZ9HCDYcb6a/view?usp=drive_link", imageSrc: "frontpage/kridha1mm2.png", altText: "kridha 100 2 Catalogue Cover", category: "1mm Laminate" },
+      { link: "https://drive.google.com/file/d/1eDqJY3j9TslS-d_uZ4fen_j4okMTbN1B/view?usp=drive_link", imageSrc: "frontpage/kridha08mm.png", altText: "kridha 800 Catalogue Cover", category: "0.92mm Laminate" },
+      { link: "https://drive.google.com/file/d/1zbOdZNqBQWihmnZXl-IHHHp62Vgxm2iU/view?usp=drive_link", imageSrc: "frontpage/dixon.png", altText: "Dixon Catalogue Cover", category: "1mm Laminate" },        
       { link: "https://drive.google.com/file/d/1gkQzhaJE-FRlwgdUKhcNDbYFPJRtPD_b/view?usp=drive_link", imageSrc: "frontpage/neltouch.png", altText: "Neltouch Catalogue Cover", category: "1mm Laminate" },
       { link: "https://drive.google.com/file/d/19l5gKu8g8mz_4jDnif4Iobd8Y5AYr2M-/view?usp=drive_link", imageSrc: "frontpage/italia.png", altText: "Italia Catalogue Cover", category: "0.92mm Laminate" },
       { link: "https://drive.google.com/file/d/1Sku8sYYLgCm4eznlK2G6DIdpageghPZ5/view?usp=drive_link", imageSrc: "frontpage/ipl.png", altText: "IPL Catalogue Cover", category: "0.92mm Laminate" },
